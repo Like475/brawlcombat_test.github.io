@@ -4,10 +4,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bunx --bun vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"build": "bunx --bun vite build",
+		"preview": "bunx --bun vite preview --host --port 80",
+		"format": "bunx --bun prettier --write .",
+		"lint": "bunx --bun prettier --check . && eslint ."
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.8.0",
