@@ -4,12 +4,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bunx --bun vite dev",
-		"build": "vite build",
-		"predeploy": "bun run build",
-		"deploy": "gh-pages -d build",
+		"build": "bunx --bun vite build",
 		"preview": "bunx --bun vite preview --host --port 80",
-		"format": "rettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"format": "bunx --bun prettier --write .",
+		"lint": "bunx --bun prettier --check . && eslint ."
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.6",
