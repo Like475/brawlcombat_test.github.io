@@ -1,32 +1,54 @@
 <script>
-	import avatar from '$lib/avatar.jpg';
-	import coin from '$lib/coin.png';
-	import energy from '$lib/energy.png';
+	import { onMount } from 'svelte';
+	import { getMe } from '$lib/api/modules/users';
+	import { postClick } from '$lib/api/modules/clicker';
+	import coin from '$lib/imgs/coin.png';
+	import energy from '$lib/imgs/energy.png';
+	import axios from 'axios';
+
+	let me = {
+		photo_url: '',
+		username: '',
+		balance: 0,
+		hour_rate: 0,
+		energy: 0
+	};
+
+	onMount(() => {
+		me = getMe();
+	});
 </script>
 
 <div>
 	<img
 		class="absolute left-[30px] top-[97px] h-[33px] w-[33px] rounded-[7px] object-cover"
 		alt="avatar"
-		src={avatar}
+		src={me.photo_url}
 	/>
 	<div
 		class="absolute left-[73px] top-[107px] font-['Roboto'] text-sm font-semibold leading-[14px] text-white"
 	>
-		surgeon.design
+		{me.username}
 	</div>
 	<div class="absolute left-[115px] top-[310px] inline-flex items-center justify-center gap-2">
 		<img class="h-[42px] w-[42px] rounded-[256px] object-cover" alt="coin icon" src={coin} />
-		<div class="font-['Roboto'] text-[40px] font-bold leading-[44px] text-[#fffefc]">507,981</div>
+		<div class="font-['Roboto'] text-[40px] font-bold leading-[44px] text-[#fffefc]">
+			{me.balance}
+		</div>
 	</div>
 	<div
 		class="absolute left-[70px] top-[413px] h-[289px] w-[289px] rounded-full bg-[#ffbd20] opacity-60 blur-[100px]"
 	></div>
-	<img
-		class="absolute left-[55px] top-[399px] h-[318px] w-[318px] rounded-[256px] object-cover"
-		alt="big coin"
-		src={coin}
-	/>
+	<button
+		class="absolute left-0 top-0 h-[318px] w-[318px] rounded-[256px] border-none object-cover"
+		onclick={() => postClick()}
+	>
+		<img
+			class="absolute left-[55px] top-[399px] h-[318px] w-[318px] rounded-[256px] object-cover"
+			alt="big coin"
+			src={coin}
+		/>
+	</button>
 	<div
 		class="absolute left-[30px] top-[180px] h-[65px] w-[368px] rounded-[15px] bg-[#101010]"
 	></div>
@@ -34,9 +56,11 @@
 	<div class="absolute left-[55px] top-[192px] font-['Roboto'] text-xs font-medium text-white">
 		Прибыль в час
 	</div>
-	<div class="absolute left-[287px] top-[205px] font-['Roboto'] text-sm font-medium text-black">
-		Увеличить
-	</div>
+	<a href="/boosts">
+		<div class="absolute left-[287px] top-[205px] font-['Roboto'] text-sm font-medium text-black">
+			Увеличить
+		</div>
+	</a>
 	<img
 		class="absolute left-[55px] top-[211px] h-[22px] w-[22px] rounded-[256px] object-cover"
 		alt="coin icon"
@@ -45,11 +69,11 @@
 	<div
 		class="absolute left-[82px] top-[215px] font-['Roboto'] text-sm font-semibold leading-none text-white"
 	>
-		500k
+		{me.hour_rate}
 	</div>
 	<div class="absolute left-[30px] top-[787px] h-[27px] w-[368px]">
 		<div class="absolute left-[18px] top-[2px] font-['Roboto'] text-sm font-semibold text-white">
-			400/500
+			{me.energy}/500
 		</div>
 		<div class="absolute left-[313px] top-[2px] font-['Roboto'] text-sm font-semibold text-white">
 			Энергия

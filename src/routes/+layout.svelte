@@ -1,15 +1,31 @@
 <script>
 	import '../app.css';
-	let { children } = $props();
+	import { onMount } from 'svelte';
+	import coin from '$lib/imgs/coin.png';
+	import missions from '$lib/imgs/missions.png';
+	import shop from '$lib/imgs/shop.png';
+	import friends from '$lib/imgs/friends.png';
+	import boosts from '$lib/imgs/boosts.png';
 
-	import coin from '$lib/coin.png';
-	import missions from '$lib/missions.png';
-	import shop from '$lib/shop.png';
-	import friends from '$lib/friends.png';
-	import boosts from '$lib/boosts.png';
+	let { children } = $props();
+	let scale = $state(1);
+
+	onMount(() => {
+		scale = window.innerWidth / 428;
+		window.addEventListener('resize', () => {
+			scale = window.innerWidth / 428;
+		});
+	});
 </script>
 
-<div class="relative h-[926px] w-[428px] bg-[#1c1f24]">
+<svelte:head>
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</svelte:head>
+
+<div
+	class="container relative h-[926px] w-[428px] bg-[#1c1f24]"
+	style="transform: scale({scale}); transform-origin: top left;"
+>
 	<div
 		class="absolute left-0 top-0 h-[245px] w-[428px] bg-gradient-to-b from-black to-[#ffbd20]"
 	></div>
@@ -92,5 +108,13 @@
 			</div>
 		</a>
 	</div>
+
+	{@render children()}
 </div>
-{@render children()}
+
+<style>
+	.container {
+		width: 428px;
+		height: 926px;
+	}
+</style>

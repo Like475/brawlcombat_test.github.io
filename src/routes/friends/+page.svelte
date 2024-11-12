@@ -1,11 +1,11 @@
 <script>
-	import yellow_gift from '$lib/yellow_gift.png';
-	import purple_gift from '$lib/purple_gift.png';
-	import coin from '$lib/coin.png';
-	import refresh from '$lib/refresh.png';
-	import avatar from '$lib/avatar.jpg';
-	import invite from '$lib/invite.png';
-	import copy from '$lib/copy.png';
+	import yellow_gift from '$lib/imgs/yellow_gift.png';
+	import purple_gift from '$lib/imgs/purple_gift.png';
+	import coin from '$lib/imgs/coin.png';
+	import refresh from '$lib/imgs/refresh.png';
+	import avatar from '$lib/imgs/avatar.jpg';
+	import invite from '$lib/imgs/invite.png';
+	import copy from '$lib/imgs/copy.png';
 </script>
 
 <div class="absolute left-[75px] top-[180px]">

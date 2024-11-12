@@ -1,7 +1,7 @@
 <script>
-	import coin from '$lib/coin.png';
-	import colt from '$lib/colt.png';
-	import gas from '$lib/gas.png';
+	import coin from '$lib/imgs/coin.png';
+	import colt from '$lib/imgs/colt.png';
+	import gas from '$lib/imgs/gas.png';
 </script>
 
 <div class="absolute left-[115px] top-[180px] inline-flex items-center justify-center gap-2">

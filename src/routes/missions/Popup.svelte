@@ -1,6 +1,6 @@
 <script>
-	import tg from '$lib/tg.png';
-	import coin from '$lib/coin.png';
+	import tg from '$lib/imgs/tg.png';
+	import coin from '$lib/imgs/coin.png';
 </script>
 
 <div class="absolute left-0 top-0 h-[926px] w-[428px] bg-black opacity-50"></div>

@@ -1,11 +1,11 @@
 <script>
-	import coin from '$lib/coin.png';
-	import pass from '$lib/shop/pass.png';
-	import gems_xs from '$lib/shop/gems_xs.png';
-	import gems_s from '$lib/shop/gems_s.png';
-	import gems_m from '$lib/shop/gems_m.png';
-	import gems_l from '$lib/shop/gems_l.png';
-	import gems_xl from '$lib/shop/gems_xl.png';
+	import coin from '$lib/imgs/coin.png';
+	import pass from '$lib/imgs/shop/pass.png';
+	import gems_xs from '$lib/imgs/shop/gems_xs.png';
+	import gems_s from '$lib/imgs/shop/gems_s.png';
+	import gems_m from '$lib/imgs/shop/gems_m.png';
+	import gems_l from '$lib/imgs/shop/gems_l.png';
+	import gems_xl from '$lib/imgs/shop/gems_xl.png';
 </script>
 
 <div

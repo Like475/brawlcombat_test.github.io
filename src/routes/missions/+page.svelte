@@ -1,7 +1,7 @@
 <script>
-	import tg from '$lib/tg.png';
-	import coin from '$lib/coin.png';
-	import arrow from '$lib/arrow.svg';
+	import tg from '$lib/imgs/tg.png';
+	import coin from '$lib/imgs/coin.png';
+	import arrow from '$lib/imgs/arrow.svg';
 
 	import Popup from './Popup.svelte';
 </script>
