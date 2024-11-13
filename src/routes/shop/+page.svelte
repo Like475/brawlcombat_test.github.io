@@ -1,11 +1,24 @@
 <script>
+	import { getItemsList, buyItem } from '$lib/api/modules/shop';
+	import { onMount } from 'svelte';
 	import coin from '$lib/imgs/coin.png';
-	import pass from '$lib/imgs/shop/pass.png';
-	import gems_xs from '$lib/imgs/shop/gems_xs.png';
-	import gems_s from '$lib/imgs/shop/gems_s.png';
-	import gems_m from '$lib/imgs/shop/gems_m.png';
-	import gems_l from '$lib/imgs/shop/gems_l.png';
-	import gems_xl from '$lib/imgs/shop/gems_xl.png';
+
+	let items = $state([]);
+
+	const buy = (id) => {
+		buyItem(id).then((data) => {
+			console.log(data);
+			getItemsList().then((data) => {
+				items = data;
+			});
+		});
+	};
+
+	onMount(() => {
+		getItemsList().then((data) => {
+			items = data;
+		});
+	});
 </script>
 
 <div
@@ -17,232 +30,51 @@
 	На подарки в игру
 </div>
 <div class="absolute left-[30px] top-[271px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[74px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			Бравл пасс
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-5 rounded-full bg-[#ffbd20]"></div>
+	{#each items as item}
+		<div class="relative mt-[10px] h-[75px] w-[368px]">
+			<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
+			<div class="absolute left-[99px] top-[12px] h-[51px] w-[74px]">
+				<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
+					{item.name}
+				</div>
+				<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
+					<div class="absolute left-0 top-0 h-[9px] w-[64px]">
+						<div class="absolute left-0 top-0 h-[9px] w-[64px] rounded-full bg-[#232323]"></div>
+						<div
+							class="absolute left-0 top-0 h-[9px] rounded-full bg-[#ffbd20]"
+							style="width: {Math.ceil((64 / item.total_quantity) * item.quantity)}px;"
+						></div>
+					</div>
+					<div
+						class="absolute left-0 top-[14px] w-[300px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
+					>
+						Осталось {item.quantity} / {item.total_quantity}
+					</div>
+				</div>
 			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
+			<button
+				class="absolute left-[285px] top-[22px] h-[31px] w-[63px]"
+				onclick={() => buy(item.id)}
 			>
-				Осталось 3 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[285px] top-[22px] h-[31px] w-[63px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[63px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[41px]">
+				<div class="absolute left-0 top-0 h-[31px] w-[63px] rounded-lg bg-[#ffbd20]"></div>
+				<div class="absolute left-[11px] top-[7px] h-[17px] w-[41px]">
+					<img
+						class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
+						alt="coin icon"
+						src={coin}
+					/>
+					<div
+						class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
+					>
+						{item.price}
+					</div>
+				</div>
+			</button>
 			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
+				class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
+				alt="pass"
+				src={item.image_url}
 			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				1M
-			</div>
 		</div>
-	</div>
-	<img class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover" alt="pass" src={pass} />
-</div>
-<div class="absolute left-[30px] top-[356px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[73px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			30 гемов
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-5 rounded-full bg-[#ffbd20]"></div>
-			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
-			>
-				Осталось 3 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[285px] top-[22px] h-[31px] w-[63px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[63px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[41px]">
-			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
-			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				1M
-			</div>
-		</div>
-	</div>
-	<img
-		class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
-		alt="30 gems"
-		src={gems_xs}
-	/>
-</div>
-<div class="absolute left-[30px] top-[441px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[73px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			170 гемов
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-5 rounded-full bg-[#ffbd20]"></div>
-			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
-			>
-				Осталось 3 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[285px] top-[22px] h-[31px] w-[63px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[63px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[41px]">
-			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
-			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				1M
-			</div>
-		</div>
-	</div>
-	<img
-		class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
-		alt="170 gems"
-		src={gems_s}
-	/>
-</div>
-<div class="absolute left-[30px] top-[526px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[73px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			360 гемов
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-5 rounded-full bg-[#ffbd20]"></div>
-			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
-			>
-				Осталось 3 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[285px] top-[22px] h-[31px] w-[63px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[63px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[41px]">
-			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
-			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				6M
-			</div>
-		</div>
-	</div>
-	<img
-		class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
-		alt="360 gems"
-		src={gems_m}
-	/>
-</div>
-<div class="absolute left-[30px] top-[611px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[73px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			960 гемов
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-5 rounded-full bg-[#ffbd20]"></div>
-			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
-			>
-				Осталось 3 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[277px] top-[22px] h-[31px] w-[71px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[71px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[49px]">
-			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
-			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				10M
-			</div>
-		</div>
-	</div>
-	<img
-		class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
-		alt="960 gems"
-		src={gems_l}
-	/>
-</div>
-<div class="absolute left-[30px] top-[696px] h-[75px] w-[368px]">
-	<div class="absolute left-0 top-0 h-[75px] w-[368px] rounded-[20px] bg-[#101010]"></div>
-	<div class="absolute left-[99px] top-[12px] h-[51px] w-[76px]">
-		<div class="absolute left-0 top-0 font-['Roboto'] text-sm font-semibold text-white">
-			2000 гемов
-		</div>
-		<div class="absolute left-0 top-[25px] h-[26px] w-[73px]">
-			<div class="absolute left-0 top-0 h-[9px] w-16">
-				<div class="absolute left-0 top-0 h-[9px] w-16 rounded-full bg-[#232323]"></div>
-				<div class="absolute left-0 top-0 h-[9px] w-[15px] rounded-full bg-[#ffbd20]"></div>
-			</div>
-			<div
-				class="absolute left-0 top-[14px] w-[80px] font-['Roboto'] text-[10px] font-medium text-[#ffbd20]"
-			>
-				Осталось 1 / 15
-			</div>
-		</div>
-	</div>
-	<div class="absolute left-[277px] top-[22px] h-[31px] w-[71px]">
-		<div class="absolute left-0 top-0 h-[31px] w-[71px] rounded-lg bg-[#ffbd20]"></div>
-		<div class="absolute left-[11px] top-[7px] h-[17px] w-[49px]">
-			<img
-				class="absolute left-0 top-0 h-[17px] w-[17px] rounded-[256px] object-cover"
-				alt="coin icon"
-				src={coin}
-			/>
-			<div
-				class="absolute left-[20px] top-[2px] font-['Roboto'] text-sm font-semibold leading-[14px] text-black"
-			>
-				12M
-			</div>
-		</div>
-	</div>
-	<img
-		class="absolute left-[12px] top-0 h-[75px] w-[75px] object-cover"
-		alt="2000 gems"
-		src={gems_xl}
-	/>
+	{/each}
 </div>

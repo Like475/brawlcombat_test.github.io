@@ -12,9 +12,6 @@
 
 	onMount(() => {
 		scale = window.innerWidth / 428;
-		window.addEventListener('resize', () => {
-			scale = window.innerWidth / 428;
-		});
 	});
 </script>
 
@@ -23,8 +20,8 @@
 </svelte:head>
 
 <div
-	class="container relative h-[926px] w-[428px] bg-[#1c1f24]"
-	style="transform: scale({scale}); transform-origin: top left;"
+	class="no-scrollbar relative h-[926px] w-[428px] overflow-x-hidden bg-[#1c1f24]"
+	style="transform-origin: top left; transform: scale({scale});"
 >
 	<div
 		class="absolute left-0 top-0 h-[245px] w-[428px] bg-gradient-to-b from-black to-[#ffbd20]"
@@ -111,10 +108,3 @@
 
 	{@render children()}
 </div>
-
-<style>
-	.container {
-		width: 428px;
-		height: 926px;
-	}
-</style>

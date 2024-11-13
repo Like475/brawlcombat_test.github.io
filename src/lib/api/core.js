@@ -16,9 +16,9 @@ const authRequest = () => {
 	initData.user = JSON.parse(initData.user);
 
 	return axios
-		.post(`${url}/users/auth`, initData)
+		.post(`${url}/users/auth`, { init_data: initData })
 		.then((response) => {
-			localStorage.setItem('token', response.body.token.access_token);
+			localStorage.setItem('token', response.data.token.access_token);
 			return response.body.token.access_token;
 		})
 		.catch((error) => {
@@ -40,7 +40,9 @@ export const getRequest = (endpoint, params) => {
 				Authorization: 'Bearer ' + token
 			}
 		})
-		.then((response) => response.data)
+		.then((response) => {
+			return response.data;
+		})
 		.catch((error) => {
 			if (error.response && error.response.status === 403) {
 				const newToken = authRequest();
@@ -68,7 +70,9 @@ export const postRequest = (endpoint, body) => {
 				Authorization: 'Bearer ' + token
 			}
 		})
-		.then((response) => response.data)
+		.then((response) => {
+			return response.data;
+		})
 		.catch((error) => {
 			if (error.response && error.response.status === 403) {
 				const newToken = authRequest();

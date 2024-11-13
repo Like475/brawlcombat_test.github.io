@@ -5,8 +5,22 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=428" />
 		%sveltekit.head%
+		<style>
+			.ns::-webkit-scrollbar {
+				display: none;
+			}
+			.ns {
+				-ms-overflow-style: none;
+				scrollbar-width: none;
+				overflow-x: hidden;
+			}
+		</style>
 	</head>
-	<body data-sveltekit-preload-data="hover">
-		%sveltekit.body%
+	<body data-sveltekit-preload-data="hover" class="ns">
+		<div style="display: contents">%sveltekit.body%</div>
+		<script>
+			const body = document.querySelector('body');
+			body.style.height = `${(window.innerWidth / 428) * 926}px`;
+		</script>
 	</body>
 </html>

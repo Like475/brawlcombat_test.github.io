@@ -4,18 +4,26 @@
 	import { postClick } from '$lib/api/modules/clicker';
 	import coin from '$lib/imgs/coin.png';
 	import energy from '$lib/imgs/energy.png';
-	import axios from 'axios';
 
-	let me = {
+	let me = $state({
 		photo_url: '',
-		username: '',
+		first_name: '',
 		balance: 0,
 		hour_rate: 0,
 		energy: 0
+	});
+
+	const click = () => {
+		postClick();
+		getMe().then((data) => {
+			me = data;
+		});
 	};
 
 	onMount(() => {
-		me = getMe();
+		getMe().then((data) => {
+			me = data;
+		});
 	});
 </script>
 
@@ -28,7 +36,7 @@
 	<div
 		class="absolute left-[73px] top-[107px] font-['Roboto'] text-sm font-semibold leading-[14px] text-white"
 	>
-		{me.username}
+		{me.first_name}
 	</div>
 	<div class="absolute left-[115px] top-[310px] inline-flex items-center justify-center gap-2">
 		<img class="h-[42px] w-[42px] rounded-[256px] object-cover" alt="coin icon" src={coin} />
@@ -41,7 +49,7 @@
 	></div>
 	<button
 		class="absolute left-0 top-0 h-[318px] w-[318px] rounded-[256px] border-none object-cover"
-		onclick={() => postClick()}
+		onclick={click}
 	>
 		<img
 			class="absolute left-[55px] top-[399px] h-[318px] w-[318px] rounded-[256px] object-cover"
