@@ -14,10 +14,8 @@
 	});
 
 	const click = () => {
+		me.balance += 1;
 		postClick();
-		getMe().then((data) => {
-			me = data;
-		});
 	};
 
 	onMount(() => {
