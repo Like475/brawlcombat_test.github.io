@@ -28,7 +28,7 @@
 
 	onMount(() => {
 		getMe().then((data) => {
-			inviteLink = `https://t.me/@brawlcombat_test_bot?startapp=friend_${data.id}`;
+			inviteLink = `https://t.me/brawlcombat_test_bot?startapp=friend_${data.id}`;
 			sendLink;
 			getUser(data.invited).then((data) => {
 				invitedFirstName = data.first_name;
