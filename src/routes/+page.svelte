@@ -14,8 +14,10 @@
 	});
 
 	const click = () => {
-		me.balance += 1;
-		me.energy -= 1;
+		if (energy > 0) {
+			me.balance += 1;
+			me.energy -= 1;
+		}
 		postClick();
 	};
 
