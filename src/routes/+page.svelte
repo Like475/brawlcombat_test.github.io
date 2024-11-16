@@ -15,6 +15,7 @@
 
 	const click = () => {
 		me.balance += 1;
+		me.energy -= 1;
 		postClick();
 	};
 
