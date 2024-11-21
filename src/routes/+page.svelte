@@ -25,6 +25,9 @@
 		getMe().then((data) => {
 			me = data;
 		});
+		setInterval(() => {
+			me.energy += 1;
+		}, 1000);
 	});
 </script>
 
