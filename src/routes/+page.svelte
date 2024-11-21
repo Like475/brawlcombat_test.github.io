@@ -44,7 +44,7 @@
 	>
 		{me.first_name}
 	</div>
-	<div class="absolute left-[115px] top-[310px] inline-flex items-center justify-center gap-2">
+	<div class="absolute top-[310px] inline-flex w-full items-center justify-center gap-2">
 		<img class="h-[42px] w-[42px] rounded-[256px] object-cover" alt="coin icon" src={coin} />
 		<div class="font-['Roboto'] text-[40px] font-bold leading-[44px] text-[#fffefc]">
 			{me.balance}
