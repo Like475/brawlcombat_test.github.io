@@ -14,7 +14,11 @@
 	});
 
 	const click = () => {
+		console.log('here');
+		console.log(energy);
+		console.log(energy > 0);
 		if (energy > 0) {
+			console.log('hhere');
 			me.balance += 1;
 			me.energy -= 1;
 		}
@@ -26,7 +30,9 @@
 			me = data;
 		});
 		setInterval(() => {
-			me.energy += 1;
+			if (me.energy < 500) {
+				me.energy += 1;
+			}
 		}, 1000);
 	});
 </script>
