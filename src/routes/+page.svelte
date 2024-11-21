@@ -14,11 +14,7 @@
 	});
 
 	const click = () => {
-		console.log('here');
-		console.log(energy);
-		console.log(energy > 0);
-		if (energy > 0) {
-			console.log('hhere');
+		if (me.energy > 0) {
 			me.balance += 1;
 			me.energy -= 1;
 		}
