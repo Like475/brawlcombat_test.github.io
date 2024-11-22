@@ -9,9 +9,7 @@
 	import copy from '$lib/imgs/copy.png';
 
 	let inviteLink = $state('');
-	let sendLink = $derived(
-		`https://t.me/share/url?url=${inviteLink}&text=Привет!+Не+хочешь+по+тапать+со+мной?`
-	);
+	let sendLink = $derived(`https://t.me/share/url?url=${inviteLink}&text=заходи`);
 	let invitedFirstName = $state('');
 	let invited = $state([]);
 
@@ -28,11 +26,9 @@
 
 	onMount(() => {
 		getMe().then((data) => {
-			inviteLink = `https://t.me/brawlcombat_test_bot?startapp=friend_${data.id}`;
+			inviteLink = `https://t.me/brawqruxi3mruco3bot?startapp=friend_${data.id}`;
 			sendLink;
-			getUser(data.invited).then((data) => {
-				invitedFirstName = data.first_name;
-			});
+			invitedFirstName = data.invited.first_name;
 		});
 		refresh_invited();
 	});
